@@ -1,4 +1,19 @@
 {{- if .Values.persistence.enabled -}}
+kind: PersistentVolume
+metadata:
+  name: {{ include "my-app.fullname" . }}-pv
+spec:
+  capacity:
+    storage: {{ .Values.persistence.size }}
+  accessModes:
+    - ReadWriteOnce
+  iscsi:
+    targetPortal: 192.168.64.30:3260
+    iqn: iqn.2026-04.tec.local:san.app
+    lun: 1
+    fsType: ext4
+    readOnly: false
+---
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
