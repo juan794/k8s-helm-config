@@ -1,4 +1,5 @@
 {{- if .Values.persistence.enabled -}}
+apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: {{ include "my-app.fullname" . }}-pv
@@ -14,8 +15,8 @@ spec:
     fsType: ext4
     readOnly: false
 ---
-kind: PersistentVolumeClaim
 apiVersion: v1
+kind: PersistentVolumeClaim
 metadata:
   name: {{ include "my-app.fullname" . }}-pvc
 spec:
